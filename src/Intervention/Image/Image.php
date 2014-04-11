@@ -738,8 +738,8 @@ class Image
     {
         // default values
         $checkTransparency = false;
-        $stepSizeX = is_int($stepSizeX) ? $stepSizeX : sqrt($this->width);
-        $stepSizeY = is_int($stepSizeY) ? $stepSizeY : sqrt($this->height);
+        $stepSizeX = is_int($stepSizeX) ? $stepSizeX : intval(sqrt($this->width));
+        $stepSizeY = is_int($stepSizeY) ? $stepSizeY : intval(sqrt($this->height));
 
         // define borders to trim away
         if (is_null($away)) {
