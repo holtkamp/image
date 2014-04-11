@@ -730,14 +730,16 @@ class Image
      * @param  array  $away Borders to trim away
      * @param  int    $tolerance Tolerance of color comparison
      * @param  int    $feather Amount of pixels outside (when positive) or inside (when negative) of the strict limit of the matched color
-     * @param  int    $stepSizeX Size of the step used when iterating over the X-axis / columns
-     * @param  int    $stepSizeY Size of the step used when iterating over the Y-axis / rows
+     * @param  int|null $stepSizeX Size of the step used when iterating over the X-axis / columns. When providing 'null', the square root of the width will be used.
+     * @param  int|null $stepSizeY Size of the step used when iterating over the Y-axis / rows When providing 'null', the square root of the height will be used.
      * @return Image
      */
     public function trim($base = null, $away = null, $tolerance = null, $feather = 0, $stepSizeX = 1, $stepSizeY = 1)
     {
         // default values
         $checkTransparency = false;
+        $stepSizeX = is_int($stepSizeX) ? $stepSizeX : sqrt($this->width);
+        $stepSizeY = is_int($stepSizeY) ? $stepSizeY : sqrt($this->height);
 
         // define borders to trim away
         if (is_null($away)) {
